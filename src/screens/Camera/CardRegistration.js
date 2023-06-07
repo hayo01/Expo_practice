@@ -1,0 +1,84 @@
+import { Image, Keyboard, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { Button } from "react-native-paper";
+
+import HTextInput from "../../components/HTextInput";
+import colors from "../../constants/colors";
+
+const CardRegistration = ({ route }) => {
+  const photoUri = route?.params?.photo ?? null;
+
+  return (
+    <TouchableWithoutFeedback
+      style={{ height: "100%", backgroundColor: colors.white }}
+      onPress={Keyboard.dismiss}
+    >
+      <ScrollView style={{ paddingHorizontal: 15 }}>
+        {photoUri && (
+          <Image
+            source={{ uri: photoUri }}
+            style={{
+              width: 330,
+              height: 330,
+              borderRadius: 10,
+              marginVertical: 15,
+              resizeMode: "contain",
+              overlayColor: colors.white,
+            }}
+          />
+        )}
+
+        {/* 회원 ID - 자동입력 */}
+        <View style={{ marginTop: 15 }}>
+          <Text>ID(Email)</Text>
+          <HTextInput textinput={{ disabled: true, value: "support@ennovalabs.com" }} />
+        </View>
+
+        {/* 회원 이름 - 자동입력 */}
+        <View style={{ marginTop: 15 }}>
+          <Text>이름</Text>
+          <HTextInput textinput={{ disabled: true, value: "김테스트" }} />
+        </View>
+
+        {/* 회원 카드 번호 - 직접입력 */}
+        <View style={{ marginTop: 15 }}>
+          <Text>카드번호</Text>
+          <View style={{ flexDirection: "row", columnGap: 10, justifyContent: "space-between" }}>
+            <HTextInput view={{ flex: 1 }} />
+            <HTextInput view={{ flex: 1 }} />
+            <HTextInput view={{ flex: 1 }} />
+            <HTextInput view={{ flex: 1 }} />
+          </View>
+        </View>
+
+        {/* 카드 유효 기간 - 직접입력 */}
+        <View style={{ marginTop: 15 }}>
+          <Text>유효기간</Text>
+          <View style={{ flexDirection: "row", columnGap: 10, alignItems: "center" }}>
+            <HTextInput view={{ width: "15%" }} />
+            <Text style={{ fontSize: 20 }}>/</Text>
+            <HTextInput view={{ width: "15%" }} />
+          </View>
+        </View>
+
+        {/* 카드 CVC 번호 - 직접입력 */}
+        <View style={{ marginTop: 15 }}>
+          <Text>CVC</Text>
+          <HTextInput view={{ width: "50%" }} />
+        </View>
+      </ScrollView>
+
+      <Button
+        style={{ backgroundColor: colors.orange_primary, borderRadius: 10, margin: 10 }}
+        textColor={colors.white}
+      >
+        등록
+      </Button>
+    </TouchableWithoutFeedback>
+  );
+};
+
+export default CardRegistration;
+
+const styles = StyleSheet.create({});
