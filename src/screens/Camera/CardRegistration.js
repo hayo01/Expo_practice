@@ -9,6 +9,8 @@ import colors from "../../constants/colors";
 const CardRegistration = ({ route }) => {
   const photoUri = route?.params?.photo ?? null;
 
+  const cardNumberInput = { keyboardType: "numeric", maxLength: 4 };
+
   return (
     <TouchableWithoutFeedback
       style={{ height: "100%", backgroundColor: colors.white }}
@@ -45,10 +47,16 @@ const CardRegistration = ({ route }) => {
         <View style={{ marginTop: 15 }}>
           <Text>카드번호</Text>
           <View style={{ flexDirection: "row", columnGap: 10, justifyContent: "space-between" }}>
-            <HTextInput view={{ flex: 1 }} />
-            <HTextInput view={{ flex: 1 }} />
-            <HTextInput view={{ flex: 1 }} />
-            <HTextInput view={{ flex: 1 }} />
+            <HTextInput view={{ flex: 1 }} textinput={cardNumberInput} />
+            <HTextInput
+              view={{ flex: 1 }}
+              textinput={{ ...cardNumberInput, secureTextEntry: true }}
+            />
+            <HTextInput
+              view={{ flex: 1 }}
+              textinput={{ ...cardNumberInput, secureTextEntry: true }}
+            />
+            <HTextInput view={{ flex: 1 }} textinput={cardNumberInput} />
           </View>
         </View>
 
@@ -56,25 +64,42 @@ const CardRegistration = ({ route }) => {
         <View style={{ marginTop: 15 }}>
           <Text>유효기간</Text>
           <View style={{ flexDirection: "row", columnGap: 10, alignItems: "center" }}>
-            <HTextInput view={{ width: "15%" }} />
+            <HTextInput
+              view={{ width: "15%" }}
+              textinput={{ keyboardType: "numeric", maxLength: 2 }}
+            />
             <Text style={{ fontSize: 20 }}>/</Text>
-            <HTextInput view={{ width: "15%" }} />
+            <HTextInput
+              view={{ width: "15%" }}
+              textinput={{ keyboardType: "numeric", maxLength: 2 }}
+            />
           </View>
         </View>
 
         {/* 카드 CVC 번호 - 직접입력 */}
         <View style={{ marginTop: 15 }}>
           <Text>CVC</Text>
-          <HTextInput view={{ width: "50%" }} />
+          <HTextInput
+            view={{ width: "50%" }}
+            textinput={{ keyboardType: "numeric", maxLength: 3 }}
+          />
         </View>
-      </ScrollView>
 
-      <Button
-        style={{ backgroundColor: colors.orange_primary, borderRadius: 10, margin: 10 }}
-        textColor={colors.white}
-      >
-        등록
-      </Button>
+        <Button
+          style={{
+            backgroundColor: colors.orange_primary,
+            borderRadius: 10,
+            marginTop: 20,
+            marginBottom: 15,
+            height: 45,
+            justifyContent: "center",
+          }}
+          textColor={colors.white}
+          labelStyle={{ fontSize: 16 }}
+        >
+          등록
+        </Button>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };

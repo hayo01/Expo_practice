@@ -14,8 +14,16 @@ const StackNavigation = () => {
       // screenOptions={{ headerBackTitle: "", headerShown: false }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="CameraScreen" component={CameraScreen} />
-      <Stack.Screen name="CardRegistration" component={CardRegistration} />
+      <Stack.Screen
+        name="CameraScreen"
+        component={CameraScreen}
+        options={{ headerBackTitle: "", headerShown: false }}
+      />
+      <Stack.Screen
+        name="CardRegistration"
+        component={CardRegistration}
+        options={{ headerTitle: "카드 등록", headerTitleStyle: { fontSize: 16 } }}
+      />
     </Stack.Navigator>
   );
 };
